@@ -1,7 +1,6 @@
 import React from "react";
 
 const Toast = ({ message, type = "success" }) => {
-  console.log({ type });
   return (
     <div className="toast toast-top toast-end">
       <div
