@@ -23,8 +23,7 @@ export default function useApiCall() {
         onSuccess(res);
       } catch (err) {
         setIsSubmitting(false);
-        console.log({ err });
-        onFailure(err.response?.data || err.message);
+        onFailure(err?.response);
       }
     },
     []

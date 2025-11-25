@@ -1,7 +1,9 @@
+import { useDispatch } from "react-redux";
 import useApiCall from "../hook/useApiCall";
 import { useToast } from "../hook/useToast";
 import SchemaForm from "./common/SchemaForm/SchemaForm";
 import Toast from "./common/Toast";
+import { addUser } from "../utils/userSlice";
 
 const loginSchema = ({ signup }) => [
   ...((signup && [
@@ -42,8 +44,9 @@ const loginSchema = ({ signup }) => [
 export default function LoginPage({ signup = false }) {
   const [isSubmitting, makeApiCall] = useApiCall();
   const { toast, showToast } = useToast();
+  const dispatch = useDispatch();
   console.log({ isSubmitting, makeApiCall });
-  console.log(toast);
+  console.log({ toast });
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-base-200">
       <div className="card p-6 w-full max-w-md">
@@ -63,10 +66,13 @@ export default function LoginPage({ signup = false }) {
                 method: "POST",
                 payload: { ...values, emailId: values?.email },
                 onSuccess: (msg) => {
-                  showToast(msg?.data, "success");
+                  console.log({ msg });
+                  dispatch(addUser(msg.data?.data));
+                  showToast(msg?.data.message, "success");
                 },
                 onFailure: (msg) => {
-                  showToast(msg?.ERROR, "error");
+                  console.log({ msg });
+                  showToast(msg?.data.ERROR, "error");
                 },
               });
             }}
