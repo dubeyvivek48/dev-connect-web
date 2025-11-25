@@ -43,10 +43,9 @@ const loginSchema = ({ signup }) => [
 
 export default function LoginPage({ signup = false }) {
   const [isSubmitting, makeApiCall] = useApiCall();
-  const { toast, showToast } = useToast();
+  const { toast, showToast } = useToast(false);
   const dispatch = useDispatch();
-  console.log({ isSubmitting, makeApiCall });
-  console.log({ toast });
+
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-base-200">
       <div className="card p-6 w-full max-w-md">
@@ -76,8 +75,11 @@ export default function LoginPage({ signup = false }) {
                 },
               });
             }}
+            submitLoader={isSubmitting}
           />
-          {toast?.message && <Toast {...toast} />}
+          {toast?.message && (
+            <Toast {...toast} onClose={() => showToast(false)} />
+          )}
         </div>
       </div>
     </div>
