@@ -4,6 +4,7 @@ import { useToast } from "../hook/useToast";
 import SchemaForm from "./common/SchemaForm/SchemaForm";
 import Toast from "./common/Toast";
 import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = ({ signup }) => [
   ...((signup && [
@@ -45,6 +46,7 @@ export default function LoginPage({ signup = false }) {
   const [isSubmitting, makeApiCall] = useApiCall();
   const { toast, showToast } = useToast(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-base-200">
@@ -67,6 +69,7 @@ export default function LoginPage({ signup = false }) {
                 onSuccess: (msg) => {
                   console.log({ msg });
                   dispatch(addUser(msg.data?.data));
+                  navigate("/");
                   showToast(msg?.data.message, "success");
                 },
                 onFailure: (msg) => {

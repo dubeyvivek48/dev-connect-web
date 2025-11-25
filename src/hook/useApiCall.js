@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 export default function useApiCall() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,8 +14,9 @@ export default function useApiCall() {
     }) => {
       try {
         setIsSubmitting(true);
+        let URL = BASE_URL + ApiKey;
         let res = await axios({
-          url: `http://localhost:3000/${ApiKey}`,
+          url: URL,
           method,
           data: payload,
           withCredentials: true,
