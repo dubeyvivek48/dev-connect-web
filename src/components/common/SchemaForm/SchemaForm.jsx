@@ -57,6 +57,7 @@ export default function SchemaForm({
   onSubmit = (v) => console.log("submit", v),
   initialValuesOverride = null,
   submitLabel = "Submit",
+  submitLoader = false,
 }) {
   // Build initialValues from schema.defaultValue (or fallback)
   const initialValues = schema.reduce((acc, field) => {
@@ -86,7 +87,9 @@ export default function SchemaForm({
       validationSchema={validationSchema}
       onSubmit={async (values, helpers) => {
         try {
+          helpers.setSubmitting(true);
           await onSubmit(values, helpers);
+          helpers.setSubmitting(false);
         } catch (err) {
           // optionally set form-level error: helpers.setStatus({ error: '...' })
           console.error(err);
@@ -98,6 +101,7 @@ export default function SchemaForm({
     >
       {({ isSubmitting, values }) => (
         <Form className="space-y-4">
+          {console.log({ submitLoader })}
           <fieldset className="fieldset  p-4">
             {/* <legend className="fieldset-legend">Login</legend> */}
             {schema.map((field) => {
@@ -184,10 +188,12 @@ export default function SchemaForm({
 
             <button
               type="submit"
-              className="btn btn-primary w-full"
-              disabled={isSubmitting}
+              className={`btn btn-primary w-full ${
+                submitLoader ? "btn-disabled" : ""
+              }`}
+              disabled={submitLoader}
             >
-              {isSubmitting ? "Submitting..." : submitLabel}
+              {submitLoader ? "Submitting..." : submitLabel}
             </button>
             <pre className=" absolute top-120  text-xs mt-2">
               {JSON.stringify(values, null)}
