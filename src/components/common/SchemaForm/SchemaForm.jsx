@@ -102,7 +102,7 @@ export default function SchemaForm({
       {({ isSubmitting, values }) => (
         <Form className="space-y-4">
           {console.log({ submitLoader })}
-          <fieldset className="fieldset  p-4">
+          <fieldset className="fieldset  py-4">
             {/* <legend className="fieldset-legend">Login</legend> */}
             {schema.map((field) => {
               const key = field.name;

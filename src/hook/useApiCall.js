@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function useApiCall() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
   const makeApiCall = useCallback(
     async ({
       ApiKey,
@@ -13,7 +15,7 @@ export default function useApiCall() {
       onFailure = () => {},
     }) => {
       try {
-        setIsSubmitting(true);
+        setLoader(true);
         let URL = BASE_URL + ApiKey;
         let res = await axios({
           url: URL,
@@ -21,15 +23,20 @@ export default function useApiCall() {
           data: payload,
           withCredentials: true,
         });
-        setIsSubmitting(false);
+        setLoader(false);
         onSuccess(res);
       } catch (err) {
-        setIsSubmitting(false);
+        console.log({ err });
+        if (err.status === 401) {
+          navigate("/login");
+        }
+        // navigate("/login");
+        setLoader(false);
         onFailure(err?.response);
       }
     },
     []
   );
 
-  return [isSubmitting, makeApiCall];
+  return [loader, makeApiCall];
 }

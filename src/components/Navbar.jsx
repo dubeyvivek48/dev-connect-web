@@ -1,23 +1,51 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useApiCall from "../hook/useApiCall";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../context/ToastContainer";
+import { addUser } from "../utils/userSlice";
 
 const Navbar = () => {
   const userInfo = useSelector((state) => state.user);
+  const [loader, makeApiCall] = useApiCall();
+  const { showToast } = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { _id, firstName, lastName, emailId, photoUrl, about, skills } =
     userInfo || {};
   console.log({ _id, firstName, lastName, emailId, photoUrl, about, skills });
+
+  const handleLogout = () => {
+    makeApiCall({
+      ApiKey: "logout",
+      method: "POST",
+
+      onSuccess: (msg) => {
+        console.log({ msg });
+        dispatch(addUser(null));
+        navigate("/login");
+        showToast(msg?.data.message, "success");
+      },
+      onFailure: (msg) => {
+        showToast(msg?.data.ERROR, "error");
+      },
+    });
+  };
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">dev-connect</a>
+        <a className="btn btn-ghost text-xl" onClick={() => navigate("/")}>
+          dev-connect
+        </a>
       </div>
-      <div className="flex gap-2">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-24 md:w-auto"
-        />
-        {userInfo && (
+
+      {userInfo && (
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered w-24 md:w-auto"
+          />
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -48,12 +76,12 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
