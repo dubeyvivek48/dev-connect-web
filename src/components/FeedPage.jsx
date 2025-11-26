@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
 import useApiCall from "../hook/useApiCall";
 import { addUser } from "../utils/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../context/ToastContainer";
+import { addFeed } from "../utils/feedSlice";
 
 const FeedPage = () => {
   const [loader, makeApiCall] = useApiCall();
+  const feeds = useSelector((state) => state.feeds);
   const { showToast } = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getUserDetails = () => {
+    if (feeds) return;
     makeApiCall({
-      ApiKey: "profile/view",
+      ApiKey: "user/feed",
       method: "GET",
 
       onSuccess: (msg) => {
         console.log({ msg });
-        dispatch(addUser(msg.data?.profile));
+        dispatch(addFeed(msg.data?.users));
 
         showToast(msg?.data.message, "success");
       },

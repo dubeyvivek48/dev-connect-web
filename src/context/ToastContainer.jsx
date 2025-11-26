@@ -15,8 +15,6 @@ export const ToastProvider = ({ children }) => {
     }, 3000);
   }, []);
 
-  console.log({ toasts });
-
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}

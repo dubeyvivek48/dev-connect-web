@@ -19,6 +19,7 @@ function App() {
                 element={<LoginPage signup={true} />}
               ></Route>
               <Route path="/" element={<FeedPage />} />
+              <Route path="/profile" element={<div>profile</div>} />
             </Route>
           </Routes>
         </BrowserRouter>
