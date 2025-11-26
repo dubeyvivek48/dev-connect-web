@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import FeedPage from "./components/FeedPage";
 import { ToastProvider } from "./context/ToastContainer";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
                 element={<LoginPage signup={true} />}
               ></Route>
               <Route path="/" element={<FeedPage />} />
-              <Route path="/profile" element={<div>profile</div>} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Routes>
         </BrowserRouter>

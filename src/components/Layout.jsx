@@ -22,13 +22,11 @@ const Layout = () => {
 
       onSuccess: (msg) => {
         console.log({ msg });
-        dispatch(addUser(msg.data?.profile));
+        dispatch(addUser(msg.data?.data));
 
         showToast(msg?.data.message, "success");
       },
       onFailure: (msg) => {
-        console.log({ msg });
-        navigate("/login");
         showToast(msg?.data.ERROR, "error");
       },
     });

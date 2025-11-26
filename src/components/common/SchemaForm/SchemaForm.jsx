@@ -80,6 +80,7 @@ export default function SchemaForm({
   }, {});
 
   const validationSchema = generateYupSchema(schema);
+  console.log({ validationSchema, initialValues });
 
   return (
     <Formik

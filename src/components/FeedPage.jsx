@@ -38,9 +38,7 @@ const FeedPage = () => {
   }, []);
   return (
     <div className="flex flex-col items-center">
-      {feeds.map((item) => (
-        <UserCard {...item} />
-      ))}
+      {feeds && feeds.map((item) => <UserCard {...item} />)}
     </div>
   );
 };
