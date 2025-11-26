@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../context/ToastContainer";
 import { addFeed } from "../utils/feedSlice";
+import UserCard from "./UserCard";
 
 const FeedPage = () => {
   const [loader, makeApiCall] = useApiCall();
@@ -35,7 +36,13 @@ const FeedPage = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
-  return <div>FeedPage</div>;
+  return (
+    <div className="flex flex-col items-center">
+      {feeds.map((item) => (
+        <UserCard {...item} />
+      ))}
+    </div>
+  );
 };
 
 export default FeedPage;
