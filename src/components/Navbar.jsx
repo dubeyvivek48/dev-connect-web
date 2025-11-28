@@ -32,10 +32,10 @@ const Navbar = () => {
     });
   };
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="navbar  bg-base-300 shadow-sm">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl" onClick={() => navigate("/")}>
-          dev-connect
+          {`<Dev_Connect />`}
         </a>
       </div>
 
@@ -69,11 +69,17 @@ const Navbar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections" className="justify-between">
+                  Connections
+                </Link>
+              </li>
+              <li>
+                <Link to="/requests" className="justify-between">
+                  Requests
+                </Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

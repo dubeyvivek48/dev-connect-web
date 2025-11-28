@@ -6,6 +6,8 @@ import appStore from "./utils/appStore";
 import FeedPage from "./components/FeedPage";
 import { ToastProvider } from "./context/ToastContainer";
 import ProfilePage from "./components/ProfilePage";
+import ConnectionsPage from "./components/ConnectionsPage";
+import ConnectionRequestPage from "./components/ConnectionRequestPage";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
               ></Route>
               <Route path="/" element={<FeedPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/connections" element={<ConnectionsPage />} />
+              <Route path="/requests" element={<ConnectionRequestPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -196,9 +196,9 @@ export default function SchemaForm({
             >
               {submitLoader ? "Submitting..." : submitLabel}
             </button>
-            <pre className=" absolute top-120  text-xs mt-2">
+            {/* <pre className=" absolute top-120  text-xs mt-2">
               {JSON.stringify(values, null)}
-            </pre>
+            </pre> */}
           </fieldset>
         </Form>
       )}
