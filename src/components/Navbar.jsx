@@ -7,13 +7,11 @@ import { addUser } from "../utils/userSlice";
 
 const Navbar = () => {
   const userInfo = useSelector((state) => state.user);
-  const [loader, makeApiCall] = useApiCall();
+  const [, makeApiCall] = useApiCall();
   const { showToast } = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { _id, firstName, lastName, emailId, photoUrl, about, skills } =
-    userInfo || {};
-  console.log({ _id, firstName, lastName, emailId, photoUrl, about, skills });
+  const { photoUrl } = userInfo || {};
 
   const handleLogout = () => {
     makeApiCall({

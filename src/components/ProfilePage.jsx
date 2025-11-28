@@ -97,9 +97,9 @@ const ProfilePage = () => {
   console.log({ user });
 
   return (
-    <div className="min-h-screen flex items-center items-stretch justify-center p-6 bg-base-200">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-base-200">
       <UserCard {...user} />
-      <div className="card w-full max-w-3xl mx-auto rounded-2xl shadow-lg border border-base-300 bg-gradient-to-br from-base-100 to-base-200 overflow-hidden my-3">
+      <div className="card  size-full max-w-3xl mx-auto rounded-2xl shadow-lg border border-base-300 bg-gradient-to-br from-base-100 to-base-200 overflow-hidden my-3">
         <div className="card card-border bg-base-100  shadow-lg rounded-box  border p-5">
           {/* <div className="avatar justify-center">
             <div className="mask mask-squircle w-24">

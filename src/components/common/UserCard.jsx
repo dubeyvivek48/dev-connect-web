@@ -56,7 +56,7 @@ export default function UserCard({
           {/* Buttons */}
           <div className="flex gap-3 mt-auto">
             {actionsButtons.map(({ label, className, callBack }) => (
-              <button onClick={callBack} className={className}>
+              <button key={label} onClick={callBack} className={className}>
                 {label}
               </button>
             ))}
